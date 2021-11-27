@@ -1,6 +1,7 @@
 plugins {
     id 'org.springframework.boot' version '2.6.0'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id "org.flywaydb.flyway" version "8.1.0"
     id 'java'
 }
 
@@ -21,10 +22,20 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+
     compileOnly 'org.projectlombok:lombok'
+
     runtimeOnly 'mysql:mysql-connector-java'
     annotationProcessor 'org.projectlombok:lombok'
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+flyway {
+    url = 'jdbc:mysql://localhost:3306/annotation_api?serverTimezone=UTC&characterEncoding=UTF-8'
+    user = 'dayspring'
+    password = 'secret'
+    locations = ['classpath:db/migration']
 }
 
 test {
