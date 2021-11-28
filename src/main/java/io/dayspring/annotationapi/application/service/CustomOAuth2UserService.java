@@ -3,7 +3,6 @@ package io.dayspring.annotationapi.application.service;
 import io.dayspring.annotationapi.domain.auth.dto.OAuthDto;
 import io.dayspring.annotationapi.domain.auth.dto.SessionUserDto;
 import io.dayspring.annotationapi.domain.type.UserRole;
-import io.dayspring.annotationapi.infrastructure.entity.RoleEntity;
 import io.dayspring.annotationapi.infrastructure.entity.UserEntity;
 import io.dayspring.annotationapi.infrastructure.repository.RoleRepository;
 import io.dayspring.annotationapi.infrastructure.repository.UserRepository;
@@ -19,7 +18,6 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 import java.util.Collections;
-import java.util.List;
 
 @RequiredArgsConstructor
 @Service

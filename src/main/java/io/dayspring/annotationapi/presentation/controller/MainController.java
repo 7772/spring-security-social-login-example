@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.dayspring.annotationapi.domain.auth.dto.SessionUserDto;
+import io.dayspring.annotationapi.presentation.auth.LoggedInUser;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -15,9 +16,7 @@ public class MainController {
     private final HttpSession httpSession;
 
     @GetMapping("/")
-    public String main() {
-        SessionUserDto sessionUserDto = (SessionUserDto) httpSession.getAttribute("user");
-
+    public String main(@LoggedInUser SessionUserDto sessionUserDto) {
         if (sessionUserDto != null) {
             return sessionUserDto.getName() + " " + sessionUserDto.getEmail();
         }
