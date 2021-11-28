@@ -41,16 +41,12 @@ public class OAuthDto {
                .build();
    }
 
-   public UserEntity toUserEntity() {
-       RoleEntity role = RoleEntity.builder()
-           .role(UserRole.FREE)
-           .build();
-
+   public UserEntity toUserEntity(List<RoleEntity> roles) {
        return UserEntity.builder()
                .name(name)
                .email(email)
                .profileImageUrl(profileImageUrl)
-               .roles(List.of(role))
+               .roles(roles)
                .build();
    }
 }

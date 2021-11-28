@@ -32,7 +32,7 @@ public class UserEntity {
     private String profileImageUrl;
 
     @Builder.Default
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(
         name = "user_role",
         joinColumns = @JoinColumn(name = "user_id"),

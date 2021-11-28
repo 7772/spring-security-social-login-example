@@ -3,7 +3,9 @@ package io.dayspring.annotationapi.application.service;
 import io.dayspring.annotationapi.domain.auth.dto.OAuthDto;
 import io.dayspring.annotationapi.domain.auth.dto.SessionUserDto;
 import io.dayspring.annotationapi.domain.type.UserRole;
+import io.dayspring.annotationapi.infrastructure.entity.RoleEntity;
 import io.dayspring.annotationapi.infrastructure.entity.UserEntity;
+import io.dayspring.annotationapi.infrastructure.repository.RoleRepository;
 import io.dayspring.annotationapi.infrastructure.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -17,11 +19,14 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 import java.util.Collections;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
 public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
+
    private final UserRepository userRepository;
+   private final RoleRepository roleRepository;
    private final HttpSession httpSession;
 
    @Override
@@ -49,7 +54,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
    private UserEntity saveOrUpdate(OAuthDto oAuthDto) {
        UserEntity user = userRepository.findByEmail(oAuthDto.getEmail())
            .map(entity -> entity.update(oAuthDto.getName(), oAuthDto.getProfileImageUrl()))
-           .orElse(oAuthDto.toUserEntity());
+           .orElse(oAuthDto.toUserEntity(roleRepository.getFreeRoles()));
 
        return userRepository.save(user);
    }

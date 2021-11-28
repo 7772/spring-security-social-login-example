@@ -9,6 +9,8 @@ group = 'io.dayspring'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
+def springbootVersion = '2.6.0'
+
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
@@ -23,7 +25,7 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-data-jpa"
     implementation "org.springframework.boot:spring-boot-starter-web"
     implementation "org.springframework.boot:spring-boot-starter-oauth2-client"
-
+    implementation "org.springframework.session:spring-session-jdbc:${springbootVersion}"
 
     compileOnly 'org.projectlombok:lombok'
 

@@ -12,3 +12,8 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: none
+
+  session:
+    store-type: jdbc
+    jdbc:
+      initialize-schema: always
