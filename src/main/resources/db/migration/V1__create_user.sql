@@ -1,5 +1,6 @@
 CREATE TABLE `user` (
     `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `name` VARCHAR(64),
-    `email` VARCHAR(64) NOT NULL UNIQUE
+    `email` VARCHAR(64) NOT NULL UNIQUE,
+    `profile_image_url` VARCHAR(256)
 );
