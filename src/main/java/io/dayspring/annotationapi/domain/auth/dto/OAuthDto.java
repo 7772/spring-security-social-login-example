@@ -41,7 +41,7 @@ public class OAuthDto {
                .build();
    }
 
-   public UserEntity toUserEntityWithGuestRole() {
+   public UserEntity toUserEntity() {
        RoleEntity role = RoleEntity.builder()
            .role(UserRole.FREE)
            .build();
