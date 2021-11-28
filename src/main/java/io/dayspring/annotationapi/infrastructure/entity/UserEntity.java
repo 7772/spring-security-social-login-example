@@ -2,27 +2,18 @@ package io.dayspring.annotationapi.infrastructure.entity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import io.dayspring.annotationapi.domain.type.UserRole;
+import lombok.*;
 
 @Entity
 @Table(name = "user")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserEntity {
 
     @Id
@@ -37,11 +28,16 @@ public class UserEntity {
     @Column(nullable = false)
     private String email;
 
-    @Column
+    @Getter
     private String profileImageUrl;
 
-    @ManyToMany
-    @JoinTable(name = "user_role")
+    @Builder.Default
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+        name = "user_role",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
     private List<RoleEntity> roles = new ArrayList<>();
 
     public UserEntity update(String name, String profileImageUrl) {
@@ -49,5 +45,11 @@ public class UserEntity {
         this.profileImageUrl = profileImageUrl;
 
         return this;
+    }
+
+    public Optional<UserRole> getRole() {
+        UserRole role = roles.isEmpty() ? null : roles.get(0).getRole();
+
+        return Optional.ofNullable(role);
     }
 }
