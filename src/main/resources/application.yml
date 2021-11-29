@@ -5,9 +5,9 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/annotation_api?serverTimezone=UTC&characterEncoding=UTF-8
+    url: jdbc:mysql://localhost:3306/db_name?serverTimezone=UTC&characterEncoding=UTF-8
     username: dayspring
-    password: secret
+    password:
 
   jpa:
     show-sql: true
