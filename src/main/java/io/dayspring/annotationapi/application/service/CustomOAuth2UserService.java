@@ -1,6 +1,6 @@
 package io.dayspring.annotationapi.application.service;
 
-import io.dayspring.annotationapi.domain.auth.dto.OAuthDto;
+import io.dayspring.annotationapi.domain.auth.vo.OAuthVo;
 import io.dayspring.annotationapi.domain.auth.dto.SessionUserDto;
 import io.dayspring.annotationapi.domain.type.UserRole;
 import io.dayspring.annotationapi.infrastructure.entity.UserEntity;
@@ -36,7 +36,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
        String userNameAttributeName = userRequest.getClientRegistration()
            .getProviderDetails().getUserInfoEndpoint().getUserNameAttributeName();
 
-       OAuthDto attributes = OAuthDto.of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
+       OAuthVo attributes = OAuthVo.of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
 
        UserEntity user = saveOrUpdate(attributes);
        httpSession.setAttribute("user", new SessionUserDto(user));
@@ -49,10 +49,10 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
                attributes.getNameAttributeKey());
    }
 
-   private UserEntity saveOrUpdate(OAuthDto oAuthDto) {
-       UserEntity user = userRepository.findByEmail(oAuthDto.getEmail())
-           .map(entity -> entity.update(oAuthDto.getName(), oAuthDto.getProfileImageUrl()))
-           .orElse(oAuthDto.toUserEntity(roleRepository.getFreeRoles()));
+   private UserEntity saveOrUpdate(OAuthVo oAuthVo) {
+       UserEntity user = userRepository.findByEmail(oAuthVo.getEmail())
+           .map(entity -> entity.update(oAuthVo.getName(), oAuthVo.getProfileImageUrl()))
+           .orElse(oAuthVo.toUserEntity(roleRepository.getFreeRoles()));
 
        return userRepository.save(user);
    }
