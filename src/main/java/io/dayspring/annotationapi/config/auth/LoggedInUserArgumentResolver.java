@@ -10,7 +10,7 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
 import io.dayspring.annotationapi.domain.auth.dto.SessionUserDto;
-import io.dayspring.annotationapi.presentation.auth.LoggedInUser;
+import io.dayspring.annotationapi.domain.auth.LoggedInUser;
 import lombok.RequiredArgsConstructor;
 
 @Component

@@ -1,4 +1,4 @@
-package io.dayspring.annotationapi.presentation.auth;
+package io.dayspring.annotationapi.domain.auth;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

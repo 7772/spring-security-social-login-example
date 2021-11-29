@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.dayspring.annotationapi.domain.auth.dto.SessionUserDto;
-import io.dayspring.annotationapi.presentation.auth.LoggedInUser;
+import io.dayspring.annotationapi.domain.auth.LoggedInUser;
 import lombok.RequiredArgsConstructor;
 
 @RestController
